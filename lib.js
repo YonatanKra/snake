@@ -17,6 +17,7 @@ var size;
 
 var food;
 var isBonus = false;
+var score = 0;
 
 var id;
 
@@ -85,6 +86,7 @@ function newfood() {
   food.y = randomy * dy;
   food.r = dr;
   size = size+1;
+    $("#score span").text(size?size:0);
     
     
     isBonus = Math.random()<0.15;
