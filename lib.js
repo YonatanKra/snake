@@ -25,6 +25,8 @@ function init() {
   ctx = $('#canvas')[0].getContext("2d");
   WIDTH = $("#canvas").width();
   HEIGHT = $("#canvas").height();
+    dx = WIDTH*20/400;
+    dy = HEIGHT*20/400;
 
   createsnake();
   newfood();
