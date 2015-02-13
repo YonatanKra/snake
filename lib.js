@@ -16,6 +16,7 @@ var snake;
 var size;
 
 var food;
+var isBonus = false;
 
 var id;
 
@@ -84,6 +85,10 @@ function newfood() {
   food.y = randomy * dy;
   food.r = dr;
   size = size+1;
+    
+    
+    isBonus = Math.random()<0.15;
+    
 }
 
 function meal(n) {
@@ -124,6 +129,13 @@ function movesnake() {
 
   // if there's food there
   if (meal(n)) {
+      // if it is a bouns, cut the tail!
+      if (isBonus){
+          snake.pop();
+          // make sure not to clear the snake completely...
+          if (snake.length > 1)
+            snake.pop();
+      }
     newfood(); // we eat it and another shows up
     
   } else {
@@ -146,6 +158,9 @@ function circle(x,y,r) {
   ctx.beginPath();
   ctx.arc(x, y, r, 0, Math.PI*2, true);
   ctx.closePath();
+    ctx.fillStyle = "#FF0000";
+    if (isBonus)
+        ctx.fillStyle = "#FFFF00";
   ctx.fill();
 }
 
@@ -170,6 +185,5 @@ function drawsnake() {
 }
 
 function drawfood() {
-  ctx.fillStyle = "#FF0000";
   circle(food.x+food.r, food.y+food.r, food.r);
 }
