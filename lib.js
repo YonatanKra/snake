@@ -6,6 +6,9 @@ var dx = 20;
 var dy = 20;
 var dr = 10;
 
+if (!$)
+    $ = jQuery;
+
 // 0: left
 // 1: up
 // 2: right
@@ -30,7 +33,7 @@ function replay(index){
     
     currReplay = replays[index];
     
-    setInterval(playReplay, 100);   
+    id = setInterval(playReplay, 100);   
 }
 
 function playReplay(){
