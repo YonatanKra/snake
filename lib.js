@@ -17,9 +17,36 @@ var size;
 
 var food;
 var isBonus = false;
-var score = 0;
+
+var replays = [];
+var currReplay;
+var currStep = 0;
 
 var id;
+
+function replay(index){
+    if (!index)
+        index = replays.length-1;
+    
+    currReplay = replays[index];
+    
+    setInterval(playReplay, 100);   
+}
+
+function playReplay(){
+    if (currStep > currReplay.snake.length){
+        alert("you are dead. size: " + size);
+        die();   
+    }
+    
+    snake = currReplay.snake[currStep];
+    food = currReplay.food[currStep];
+    size = currReplay.size[currStep];
+    direction = currReplay.direction[currStep];
+    isBonus = currReplay.isBonus[currStep++];
+    
+    draw();
+}
 
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
@@ -33,6 +60,14 @@ function init() {
 
   direction = 0;
   size = 1;
+
+    replays[replays.length] = {
+        food: [],
+        snake: [],
+        size: [],
+        direction: [],
+        isBonus: []
+};
 
   id = setInterval(step, 100);
 }
